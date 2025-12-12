@@ -7,6 +7,8 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
+var Db *pgx.Conn
+
 func InitDatabase() {
 	log.Print("Connecting to database...")
 
@@ -29,4 +31,5 @@ func InitDatabase() {
 		log.Printf("find account: id %s, name %s", id, name)
 	}
 
+	Db = conn
 }
