@@ -1,21 +1,19 @@
 package main
 
 import (
-	"log"
-	"net/http"
+	"context"
 
-	"az3r.me.video_on_demand/modules"
+	"az3r.me.video_on_demand/modules/api"
+	"az3r.me.video_on_demand/modules/db"
+	"az3r.me.video_on_demand/modules/ytb"
 )
 
 func main() {
-	modules.InitDatabase()
+	db.InitDatabase()
+	defer db.Conn.Close(context.Background())
+	api.InitHttpServer()
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		var data string = "Hello, World!"
-		w.Write([]byte(data))
-
-	})
-
-	log.Printf("Listening on port 3000")
-	http.ListenAndServe(":3000", nil)
+	ytb.DownloadVideo("https://www.youtube.com/watch?v=6KqQwn4Y9UA")
+	// log.Printf("Listening on port 3000")
+	// http.ListenAndServe(":3000", nil)
 }
