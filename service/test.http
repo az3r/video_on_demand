@@ -1,1 +1,8 @@
-GET http://localhost:3000
+GET http://localhost:3000/get_video_list
+
+POST http://localhost:3000/upload
+Content-Type: application/json
+
+{
+  "url": "https://www.youtube.com/watch?v=8GVw842VlpE"
+}
